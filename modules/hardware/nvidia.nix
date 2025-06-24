@@ -1,14 +1,11 @@
-{config, ...}: {
-  hardware.graphics.enable = true;
+{pkgs, ...}: {
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  # hardware.opengl has beed changed to hardware.graphics
 
   services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.open = true;
 }
