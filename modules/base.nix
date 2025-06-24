@@ -32,7 +32,7 @@
   environment.systemPackages = with pkgs; [
     git
     curl
-    neovim
+    neofetch
     wget
     htop
     unzip
