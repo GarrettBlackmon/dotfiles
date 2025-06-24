@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   shellAliases = {
     rebuild = "sudo nixos-rebuild switch --flake ~/dotfiles#GLaDOS";
     rebuild-boot = "sudo nixos-rebuild boot --flake ~/dotfiles#GLaDOS";
@@ -15,7 +17,6 @@ in {
     chromium
     steam
     gnome-terminal
-    vscode
     obs-studio
   ];
 
@@ -25,15 +26,37 @@ in {
     userEmail = "garrett@blackmon.dev";
   };
 
-  # programs.gnome-terminal = {
-  #   enable = true;
-  #   profile = {
-  #     "b1dcc9dd-5262-4d8d-a863-c897e6d979b9" = {
-  #       visibleName = "Garrett";
-  #       font = "Monospace 12";
-  #     };
-  #   };
-  # };
+  programs.vscode = {
+    enable = true;
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        ms-python.python
+        ms-vscode.cpptools
+        esbenp.prettier-vscode
+        jnoortheen.nix-ide
+      ];
+      userSettings = {
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nixd";
+        "nix.serverSettings" = {
+
+          "nixd" = {
+            "formatting" = {
+              "command" = ["alejandra"];
+            };
+            "options" = {
+              "nixos" = {
+                "expr" = "(builtins.getFlake \"/home/garrett/dotfiles\).nixosConfigurations.GLaDOS.options";
+              };
+              "home-manager" = {
+                "expr" = "(builtins.getFlake \"/home/garrett/dotfiles\).nixosConfigurations.GLaDOS.options.home-manager.users.type.getSubOptions []";
+              };
+            };
+          };
+        };
+      };
+    };
+  };
 
   programs.bash = {
     enable = true;

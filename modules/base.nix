@@ -1,9 +1,13 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    consoleMode = "max";
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.networkmanager.enable = true;
@@ -36,7 +40,12 @@
     wget
     htop
     unzip
+    bat
+    nixd
+    alejandra
   ];
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   programs.firefox.enable = true;
 }
