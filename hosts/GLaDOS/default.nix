@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{...}: {
   imports = [
     ../../modules/base.nix
     ../../modules/desktop/gnome.nix
@@ -13,6 +11,5 @@
   networking.hostName = "GLaDOS";
   system.stateVersion = "25.05";
 
-  age.identityPaths = [ "/home/garrett/.ssh/id_agenix" ];
-
+  age.identityPaths = ["/home/garrett/.ssh/id_agenix"];
 }

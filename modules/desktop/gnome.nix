@@ -1,12 +1,11 @@
 {
-  config,
   lib,
   pkgs,
   ...
 }: {
   # Enable GNOME display manager and desktop
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Keyboard layout
   services.xserver.xkb = {
@@ -19,6 +18,10 @@
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/ashes.yaml";
     image = ./cherryb.png;
+    targets.qt = {
+      enable = true;
+      platform = lib.mkForce "qtct";
+    };
   };
 
   # Install extensions and tweaks
@@ -47,11 +50,22 @@
             "firefox.desktop"
             "chromium-browser.desktop"
             "org.gnome.Nautilus.desktop"
-            "org.gnome.Console.desktop"
+            "kitty.desktop"
             "code.desktop"
             "discord.desktop"
             "steam.desktop"
           ];
+
+          #remap close
+          "org/gnome/desktop/wm/keybindings" = {
+            close = ["<Super>q"]; # Remap to Super+Q
+          };
+
+          #set gnome-terminal instead of gnome-console
+          # "org/gnome/desktop/applications/terminal" = {
+          #   exec = "gnome-terminal";
+          #   exec-arg = "--";
+          # };
 
           #Enable Extensions
           #gnome-extensions list
@@ -77,6 +91,7 @@
             intellihide = false;
             click-action = "minimize";
             show-mounts = false;
+            hotkeys-show-dock = false;
           };
 
           #vitals settings

@@ -1,7 +1,10 @@
-{ config, inputs, pkgs, ... }:
-
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  config,
+  inputs,
+  pkgs,
+  ...
+}: {
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   boot.loader.systemd-boot = {
     enable = true;
@@ -45,8 +48,12 @@
     alejandra
   ];
 
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.meslo-lg
+    nerd-fonts.hack
+  ];
+
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   programs.firefox.enable = true;
 }
-
