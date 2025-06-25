@@ -53,32 +53,41 @@ in {
     };
   };
 
-  programs.kitty = {
+  programs.ghostty = {
     enable = true;
-
-    font = {
-      name = lib.mkForce "Hack Nerd Font";
-      size = 12;
-    };
-
-    shellIntegration.enableZshIntegration = true;
-
+    enableZshIntegration = true;
     settings = {
-      background_opacity = lib.mkForce "0.90";
-      enable_audio_bell = "no";
-      confirm_os_window_close = 0;
-
-      # Padding
-      margin_width = 10;
-      margin_height = 10;
-    };
-
-    # Optional keybindings or extra settings
-    keybindings = {
-      "ctrl+shift+v" = "paste_from_clipboard";
-      "ctrl+shift+c" = "copy_to_clipboard";
+      background-opacity =  "0.7";
+      
     };
   };
+
+  # programs.kitty = {
+  #   enable = true;
+
+  #   font = {
+  #     name = lib.mkForce "Hack Nerd Font";
+  #     size = 12;
+  #   };
+
+  #   shellIntegration.enableZshIntegration = true;
+
+  #   settings = {
+  #     background_opacity = lib.mkForce "0.90";
+  #     enable_audio_bell = "no";
+  #     confirm_os_window_close = 0;
+
+  #     # Padding
+  #     margin_width = 10;
+  #     margin_height = 10;
+  #   };
+
+  #   # Optional keybindings or extra settings
+  #   keybindings = {
+  #     "ctrl+shift+v" = "paste_from_clipboard";
+  #     "ctrl+shift+c" = "copy_to_clipboard";
+  #   };
+  # };
 
   # programs.wezterm = {
   #   enable = true;
@@ -162,7 +171,7 @@ in {
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "Launch Alacritty";
-      command = "kitty";
+      command = "ghostty";
       binding = "<Super>T";
     };
 

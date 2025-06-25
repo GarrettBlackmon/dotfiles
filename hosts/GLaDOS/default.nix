@@ -12,4 +12,5 @@
   system.stateVersion = "25.05";
 
   age.identityPaths = ["/home/garrett/.ssh/id_agenix"];
+
 }

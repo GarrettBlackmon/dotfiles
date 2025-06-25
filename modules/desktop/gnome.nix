@@ -50,7 +50,7 @@
             "firefox.desktop"
             "chromium-browser.desktop"
             "org.gnome.Nautilus.desktop"
-            "kitty.desktop"
+            "ghostty.desktop"
             "code.desktop"
             "discord.desktop"
             "steam.desktop"
